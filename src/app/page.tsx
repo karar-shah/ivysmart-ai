@@ -11,7 +11,6 @@ export default function Home() {
             <LuBrain className="h-8 w-8 text-blue-500 mr-2" />
             <h1 className="text-2xl font-bold text-gray-900">IvySmart AI</h1>
           </div>
-          <AuthForm />
         </div>
       </div>
     </div>

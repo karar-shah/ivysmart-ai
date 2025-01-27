@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model cart {
+  id         Int    @id @default(autoincrement())
+  user_id    String @db.VarChar(255)
+  product_id String @db.VarChar(255)
+  quantity   Int
+  size       String @db.VarChar(255)
+  price      Int
+}
+
+model circuline {
+  id               Int      @id @default(autoincrement())
+  name             String
+  email            String
+  images_generated Int?     @default(0)
+  image_url_array  String[] @default([])
+}
+
+model jwt_users {
+  user_id    Int       @id @default(autoincrement())
+  name       String    @db.VarChar(256)
+  email      String    @unique(map: "jwt_users_email_unique") @db.VarChar(256)
+  password   String    @db.VarChar(256)
+  role       String?   @default("user") @db.VarChar(256)
+  photo      String?   @default("default.png") @db.VarChar(256)
+  verified   Boolean?  @default(false)
+  created_at DateTime? @default(now()) @db.Timestamp(6)
+  updatedAt  DateTime? @default(now()) @db.Timestamp(6)
+}
+
+model ivy_user {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  password      String?
+  }
