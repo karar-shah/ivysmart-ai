@@ -1,9 +1,10 @@
 import { middle_school_mathematics } from "@/const/teaching_data";
 import { openai } from "@ai-sdk/openai";
 import { CoreMessage, streamText } from "ai";
+import { NextResponse } from "next/server";
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+export const maxDuration = 60;
+export const runtime = "edge";
 
 export async function POST(req: Request) {
   const {
@@ -39,10 +40,14 @@ export async function POST(req: Request) {
 
   console.log("fullPrompt", fullPrompt);
 
-  const result = streamText({
-    model: openai("gpt-4o"),
-    messages: fullPrompt,
-  });
-
-  return result.toDataStreamResponse();
+  try {
+    const result = streamText({
+      model: openai("gpt-4o"),
+      messages: fullPrompt,
+    });
+    return result.toDataStreamResponse();
+  } catch (error) {
+    console.log("error", error);
+    return NextResponse.json({ error, status: 500, message: error });
+  }
 }
