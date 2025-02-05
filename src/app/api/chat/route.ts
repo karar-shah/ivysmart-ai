@@ -1,4 +1,4 @@
-import { middle_school_mathematics } from "@/const/teaching_data";
+import { middle_school_mathematics } from "@/const/const";
 import { openai } from "@ai-sdk/openai";
 import { CoreMessage, streamText } from "ai";
 import { NextResponse } from "next/server";

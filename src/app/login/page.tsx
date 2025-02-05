@@ -1,9 +1,10 @@
 import React from "react";
+import LogInComp from "./LogInComp";
 
 export default function page() {
   return (
     <div>
-      <h1>Login</h1>
+      <LogInComp />
     </div>
   );
 }

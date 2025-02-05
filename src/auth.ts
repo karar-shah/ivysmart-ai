@@ -27,7 +27,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
   },
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   session: {
     strategy: "jwt",
     maxAge: 24 * 60 * 60,
