@@ -1,22 +1,17 @@
 "use client";
-
 import React, { useState, useTransition } from "react";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterAction } from "../actions/Register";
 import { LuBrain } from "react-icons/lu";
 import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
+import { RegisterSchema } from "@/schemes";
+import { LoginAction } from "../../actions/Login";
 import { signIn } from "next-auth/react";
 
-export default function SignUpComp() {
-  const RegisterSchema = z.object({
-    email: z.string().email("Invalid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-  });
-
+export default function LogInComp() {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
@@ -36,14 +31,15 @@ export default function SignUpComp() {
     setSuccess(undefined);
     startTransition(async () => {
       console.log("values", values);
-      const res = await RegisterAction(values);
-      setError(res.error);
-      setSuccess(res.success);
-      if (!res.error) {
+      const res = await LoginAction(values);
+      setError(res!.error);
+      setSuccess(res!.success);
+      if (!res!.error) {
         router.push("/");
       }
     });
   };
+
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg md:mb-8">
@@ -58,7 +54,7 @@ export default function SignUpComp() {
           onClick={() => signIn("google", { redirectTo: "/" })}
         >
           <FcGoogle size={25} className="mr-2" />
-          <span>SignUp In with Google</span>
+          <span>LogIn In with Google</span>
         </button>
         <div className="flex items-center my-4">
           <div className="flex-grow border-t border-gray-300"></div>
@@ -101,14 +97,14 @@ export default function SignUpComp() {
             className="bg-emerald-700 hover:bg-emerald-600 text-white font-medium py-2 rounded-lg w-full"
             disabled={isPending}
           >
-            {isPending ? "Registering..." : "Register"}
+            {isPending ? "Logging In..." : "LogIn"}
           </button>
         </form>
         {/* SignIn Link */}
         <div className="mt-4 text-center text-sm text-gray-600">
-          Already have an account?{" "}
-          <Link href="/login" className="text-emerald-700 underline">
-            LogIn
+          Don't have an account?{" "}
+          <Link href="/signup" className="text-emerald-700 underline">
+            SignUp
           </Link>
         </div>
       </div>
