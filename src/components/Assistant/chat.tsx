@@ -61,7 +61,6 @@ type ChatProps = {
 const Chat = ({
   functionCallHandler = () => Promise.resolve(""), // default to return empty string
 }: ChatProps) => {
-  const { file_ids } = useIvyStore();
   const [userInput, setUserInput] = useState("");
   const [messages, setMessages] = useState<MessageProps[]>([]);
   const [inputDisabled, setInputDisabled] = useState(false);
@@ -95,7 +94,6 @@ const Chat = ({
         method: "POST",
         body: JSON.stringify({
           content: text,
-          file_ids: file_ids,
         }),
       }
     );

@@ -10,13 +10,13 @@ const FileViewer = () => {
     { file_id: string; filename: string; status: string }[]
   >([]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     fetchFiles();
-  //   }, 90000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchFiles();
+    }, 5000);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   const fetchFiles = async () => {
     const resp = await fetch("/api/assistants/files", {
@@ -44,13 +44,13 @@ const FileViewer = () => {
       method: "POST",
       body: data,
     });
-    const file_ = await file.json();
+    // const file_ = await file.json();
 
-    if (file_.file_id) {
-      fetchFiles();
-      updateFileIds(file_.file_id);
-    }
-    console.log("assistant/files::POST", file_);
+    // if (file_.file_id) {
+    //   fetchFiles();
+    //   updateFileIds(file_.file_id);
+    // }
+    // console.log("assistant/files::POST", file_);
   };
 
   return (

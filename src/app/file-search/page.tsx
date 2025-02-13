@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import styles from "../shared/page.module.css";
 
 import Chat from "../../components/Assistant/chat";
 import FileViewer from "../../components/Assistant/file-viewer";

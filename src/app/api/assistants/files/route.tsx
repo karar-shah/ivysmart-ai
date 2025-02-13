@@ -1,16 +1,10 @@
 import { assistantId } from "@/app/assistant-config";
 import { openai } from "@/app/openai";
-import { NextRequest, NextResponse } from "next/server";
 
 // upload file to assistant's vector store
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   const formData = await request.formData(); // process file as FormData
   const file = formData.get("file"); // retrieve the single file from FormData
-
-  if (!file) {
-    return NextResponse.json({ error: "No file uploaded", status: 400 });
-  }
-
   const vectorStoreId = await getOrCreateVectorStore(); // get or create vector store
 
   // upload using the file stream
@@ -20,17 +14,10 @@ export async function POST(request: NextRequest) {
   });
 
   // add file to vector store
-  const vectorFile = await openai.beta.vectorStores.files.create(
-    vectorStoreId,
-    {
-      file_id: openaiFile.id,
-    }
-  );
-  return NextResponse.json({
+  await openai.beta.vectorStores.files.create(vectorStoreId, {
     file_id: openaiFile.id,
-    filename: openaiFile.filename,
-    status: vectorFile.status,
   });
+  return new Response();
 }
 
 // list files in assistant's vector store
@@ -56,7 +43,7 @@ export async function GET() {
 }
 
 // delete file from assistant's vector store
-export async function DELETE(request: NextRequest) {
+export async function DELETE(request: Request) {
   const body = await request.json();
   const fileId = body.fileId;
 
