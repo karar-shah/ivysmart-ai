@@ -2,29 +2,30 @@
 
 import { welcomeMessage } from "@/const/const";
 import { useIvyStore } from "@/stores/ivyStore";
-import { useChat } from "ai/react";
-import { useEffect, useRef } from "react";
+import { useChat } from "@ai-sdk/react";
+import { DefaultChatTransport } from "ai";
+import { useEffect, useRef, useState } from "react";
 import { BsSend } from "react-icons/bs";
 import Markdown from "react-markdown";
 
 export default function ChatUI() {
   const { uiState, updateUiState } = useIvyStore();
 
-  const { messages, input, handleInputChange, handleSubmit, setMessages } =
-    useChat({
-      api: "/api/chat",
-      body: { school_level: "6-8 (Middle School)" },
-    });
+  const [input, setInput] = useState("");
+  const { messages, sendMessage, setMessages } = useChat({
+    transport: new DefaultChatTransport({
+      api: "/api/stream-test",
+    }),
+  });
 
   const chatDivRef = useRef<HTMLDivElement>(null);
-  console.log("messages", messages);
 
-  // use setMessages in useEffect to update the message arry with welcome message
+  // use setMessages in useEffect to update the message array with welcome message
   useEffect(() => {
     setMessages([
       {
         id: "1",
-        content: welcomeMessage,
+        parts: [{ type: "text", text: welcomeMessage }],
         role: "assistant",
       },
     ]);
@@ -39,11 +40,15 @@ export default function ChatUI() {
 
   return (
     uiState === "chat" && (
-      <div className="animate-fade flex flex-col w-full p-4 pb-0 pt-1 space-y-4 overflow-y-auto h-full">
-        <p className="text-gray-600 text-center px-6 py-2 rounded-full shadow-md bg-zinc-50 w-fit self-center">
+      <div className="h-full flex flex-col animate-fade w-full">
+        <p className="text-gray-600 text-center px-6 py-2 rounded-full shadow-md bg-zinc-50 w-fit self-center mt-1 mb-2 flex-shrink-0">
           <b>{"Middle School"}</b> - <b>{"Mathematics"}</b>
         </p>
-        <div className="md:pb-12 max-h-96 overflow-y-auto" ref={chatDivRef}>
+
+        <div
+          className="flex-grow overflow-y-auto px-4 space-y-4"
+          ref={chatDivRef}
+        >
           {messages.map((msg, index) => (
             <div
               key={index}
@@ -58,25 +63,35 @@ export default function ChatUI() {
                     : "bg-emerald-50 text-gray-800"
                 }`}
               >
-                <Markdown>{msg.content}</Markdown>
+                <Markdown>
+                  {msg.parts
+                    .filter((part) => part.type === "text")
+                    .map((part) => part.text)
+                    .join("")}
+                </Markdown>
               </div>
             </div>
           ))}
         </div>
-        <div>
+
+        <div className="flex-shrink-0 p-4 pt-2">
           <form
-            onSubmit={handleSubmit}
-            className="md:fixed bottom-0 left-0 right-0 flex justify-center items-center gap-5 md:px-4 shadow-xl pb-9 h-fit bg-opacity-70 "
+            onSubmit={(e) => {
+              e.preventDefault();
+              sendMessage({ text: input });
+              setInput("");
+            }}
+            className="flex justify-center items-center gap-5 shadow-lg p-2 rounded-lg bg-white"
           >
             <input
-              className="w-full max-w-md border border-zinc-300 rounded-lg shadow-lg px-4 py-3 "
+              className="w-full max-w-md border border-zinc-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               value={input}
               placeholder="Say something..."
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.currentTarget.value)}
             />
             <button
               type="submit"
-              className="p-3 text-white bg-emerald-600 rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 h-full "
+              className="p-3 text-white bg-emerald-600 rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             >
               <BsSend />
             </button>

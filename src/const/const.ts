@@ -77,12 +77,13 @@ export const school_level_disabled = [
 export const welcomeMessage = `👋 Hello! I'm **IvySmart AI**, your personal educational assistant.
 
 I'm here to help you with:
-- Tutoring across all subjects (Math, Science, History, Literature, Languages)
-- Answering questions at any education level (K-12 through Graduate)
-- Explaining complex concepts in simple terms
-- Providing step-by-step problem solving
-- Analyzing documents and homework assignments
-- Offering study tips and learning strategies
+- Middle school mathematics topics like Pre-Algebra, Ratios and Proportions, Percents, Integers and Rational Numbers, Linear Equations and Inequalities, Geometry, and Probability and Statistics
 
-Just type **'Hi!'** and we can get started!
+I can also:
+- Explain complex concepts in simple terms
+- Provide step-by-step problem solving
+- Analyze documents and homework assignments
+- Offer study tips and learning strategies
+
+Just type **'Hi!'** and we can get started with the first topic!
 `;

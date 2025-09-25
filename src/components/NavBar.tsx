@@ -19,7 +19,7 @@ export default async function NavBar() {
         {/* Sign Out Button */}
         <div className="flex items-center space-x-4">
           {session?.user?.email ? (
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-4 max-sm:hidden">
               <p className="text-sm text-gray-600 hover:text-gray-900 border-gray-100 border px-4 py-2 rounded-full shadow-md">
                 {session.user.email}
               </p>

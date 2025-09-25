@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ai-sdk/openai": "^1.1.5",
+    "@ai-sdk/openai": "^2.0.32",
+    "@ai-sdk/react": "^2.0.47",
     "@auth/prisma-adapter": "^2.7.4",
     "@heroui/dropdown": "^2.3.10",
     "@heroui/react": "^2.6.14",
@@ -18,7 +19,7 @@
     "@prisma/extension-accelerate": "^1.2.1",
     "@tailwindcss/typography": "^0.5.16",
     "@types/bcryptjs": "^2.4.6",
-    "ai": "^4.1.11",
+    "ai": "^5.0.47",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "framer-motion": "^12.0.6",
@@ -31,7 +32,7 @@
     "react-markdown": "^9.0.3",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.6.0",
-    "zod": "^3.24.1",
+    "zod": "^4.1.9",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
