@@ -33,7 +33,7 @@ export const RegisterAction = async (
       password: hashedPassword,
     },
   });
-  console.log("User created:", user);
+  // console.log("User created:", user);
   // SEND VERIFICATION TOkEN TO EMAIL
   return {
     success: "User Registered Successfully",

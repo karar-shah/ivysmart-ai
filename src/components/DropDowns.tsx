@@ -21,11 +21,11 @@ export default function StudentSelection() {
     useIvyStore();
 
   const handleConfirm = () => {
-    console.log("DropDownOption");
+    // console.log("DropDownOption");
     if (DropDownOption.school_level && DropDownOption.subject) {
       updateUiState("chat");
     } else {
-      console.log("toast");
+      // console.log("toast");
       toast.warning("Select School Level and Subject");
     }
   };

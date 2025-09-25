@@ -22,19 +22,19 @@ export default {
           let db_user = null;
 
           const validatedFields = LoginSchema.safeParse(credentials);
-          console.log("ValidatedFields", validatedFields);
+          // console.log("ValidatedFields", validatedFields);
           if (!validatedFields.success) {
             throw new Error("Invalid credentials.");
           }
           const { email, password } = validatedFields.data;
 
           db_user = await getUserByEmail(email);
-          console.log("user", db_user);
+          // console.log("user", db_user);
           if (!db_user || !db_user?.password) {
             throw new Error("Invalid credentials.");
           }
 
-          console.log("password validated!!!", password);
+          // console.log("password validated!!!", password);
           const isValid = await bcrypt.compare(
             password,
             db_user?.password || ""

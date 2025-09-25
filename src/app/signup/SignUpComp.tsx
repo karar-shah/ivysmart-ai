@@ -35,7 +35,7 @@ export default function SignUpComp() {
     setError(undefined);
     setSuccess(undefined);
     startTransition(async () => {
-      console.log("values", values);
+      // console.log("values", values);
       const res = await RegisterAction(values);
       setError(res.error);
       setSuccess(res.success);

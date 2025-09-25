@@ -30,7 +30,7 @@ export default function LogInComp() {
     setError(undefined);
     setSuccess(undefined);
     startTransition(async () => {
-      console.log("values", values);
+      // console.log("values", values);
       const res = await LoginAction(values);
       setError(res!.error);
       setSuccess(res!.success);

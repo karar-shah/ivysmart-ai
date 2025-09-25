@@ -2,7 +2,7 @@ import prisma from "../lib/prisma";
 
 export const getUserByEmail = async (email: string) => {
   try {
-    console.log("email", email);
+    // console.log("email", email);
     const user = await prisma.ivy_user.findUnique({ where: { email } });
     return user;
   } catch (error) {

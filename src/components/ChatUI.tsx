@@ -7,12 +7,13 @@ import { DefaultChatTransport } from "ai";
 import { useEffect, useRef, useState } from "react";
 import { BsSend } from "react-icons/bs";
 import Markdown from "react-markdown";
+import { PiSpinnerGapLight } from "react-icons/pi";
 
 export default function ChatUI() {
   const { uiState, updateUiState } = useIvyStore();
 
   const [input, setInput] = useState("");
-  const { messages, sendMessage, setMessages } = useChat({
+  const { messages, sendMessage, setMessages, status } = useChat({
     transport: new DefaultChatTransport({
       api: "/api/stream-test",
     }),
@@ -72,6 +73,11 @@ export default function ChatUI() {
               </div>
             </div>
           ))}
+          {status === "submitted" && (
+            <div className="flex justify-center">
+              <PiSpinnerGapLight className="animate-spin" />
+            </div>
+          )}
         </div>
 
         <div className="flex-shrink-0 p-4 pt-2">
