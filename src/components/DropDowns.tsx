@@ -31,9 +31,9 @@ export default function StudentSelection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5 w-full">
+    <div className="flex flex-col items-center justify-center md:mt-5 w-full">
       {uiState === "dropzone" ? (
-        <Card className="w-full max-w-lg p-6 bg-white shadow-xl rounded-2xl mt-2 animate-fade">
+        <Card className="w-full max-w-lg p-6 bg-white shadow-xl rounded-2xl md:mt-2 animate-fade">
           <CardBody className="flex flex-col items-center space-y-6 w-full">
             <h2 className="text-2xl font-semibold text-emerald-700 text-center pb-5">
               Select Your School Level & Subject
