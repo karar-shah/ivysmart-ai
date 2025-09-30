@@ -57,9 +57,9 @@ export default function LogInComp() {
           <span>LogIn In with Google</span>
         </button>
         <div className="flex items-center my-4">
-          <div className="flex-grow border-t border-gray-300"></div>
+          <div className="grow border-t border-gray-300"></div>
           <span className="px-4 text-gray-500">or with e-mail</span>
-          <div className="flex-grow border-t border-gray-300"></div>
+          <div className="grow border-t border-gray-300"></div>
         </div>
         {/* Form */}
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">

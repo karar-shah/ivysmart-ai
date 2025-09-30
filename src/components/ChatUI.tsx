@@ -168,12 +168,12 @@ export default function ChatUI() {
   return (
     uiState === "chat" && (
       <div className="h-full flex flex-col animate-fade w-full">
-        <p className="text-gray-600 text-center px-6 py-2 rounded-full shadow-md bg-zinc-50 w-fit self-center mt-1 mb-2 flex-shrink-0">
+        <p className="text-gray-600 text-center px-6 py-2 rounded-full shadow-md bg-zinc-50 w-fit self-center mt-1 mb-2 shrink-0">
           <b>{"Middle School"}</b> - <b>{"Mathematics"}</b>
         </p>
 
         <div
-          className="flex-grow overflow-y-auto px-4 space-y-4"
+          className="grow overflow-y-auto px-4 space-y-4"
           ref={chatDivRef}
         >
           {messages.map((msg, index) => (
@@ -211,7 +211,7 @@ export default function ChatUI() {
           )}
         </div>
         <div
-          className={`flex-shrink-0 p-4 pt-2 ${
+          className={`shrink-0 p-4 pt-2 ${
             uploadedFiles.length > 0 ? "pb-6" : ""
           }`}
         >
